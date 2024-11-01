@@ -17,15 +17,42 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           body: Column(
             children: [
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ImageIcon(
+                      AssetImage("assets/manu.png"),
+                      size: 24,
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.search),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(Icons.notifications_active)
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
-                  ImageIcon(
-                    AssetImage("assetName"),
-                    size: 24,
-                    color: Colors.black,
-                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Popular Books",
+                      style: TextStyle(fontSize: 26),
+                    ),
+                  )
                 ],
-              )
+              ),
+              Container()
             ],
           ),
         ),
