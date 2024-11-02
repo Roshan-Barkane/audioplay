@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'audio/app_color.dart' as AppColors;
 
@@ -9,6 +10,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // Change to List<Map<String, dynamic>>? to hold a list of maps
+  List<Map<String, dynamic>>? popularbooks;
+
+  // Read data from JSON file
+  void ReadData() {
+    DefaultAssetBundle.of(context).loadString("json/popularBooks.json").then(
+      (s) {
+        setState(() {
+          // Decode JSON and assign as a List<Map<String, dynamic>>
+          popularbooks = List<Map<String, dynamic>>.from(json.decode(s));
+        });
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    ReadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(
                           width: 10,
                         ),
-                        Icon(Icons.notifications_active)
+                        Icon(Icons.notifications_active),
                       ],
                     )
                   ],
@@ -67,14 +89,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 180,
                         child: PageView.builder(
                           controller: PageController(viewportFraction: 0.8),
+                          itemCount:
+                              popularbooks == null ? 0 : popularbooks!.length,
                           itemBuilder: (_, i) {
                             return Container(
                               margin: EdgeInsets.only(right: 10),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                      image: AssetImage("img/item1.jpg"),
-                                      fit: BoxFit.fill)),
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: AssetImage(popularbooks![i]["img"]),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             );
                           },
                         ),
