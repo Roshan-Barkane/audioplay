@@ -52,7 +52,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 ],
               ),
-              Container()
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 180,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: -20,
+                      right: 0,
+                      child: Container(
+                        height: 180,
+                        child: PageView.builder(
+                          controller: PageController(viewportFraction: 0.8),
+                          itemBuilder: (_, i) {
+                            return Container(
+                              margin: EdgeInsets.only(right: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      image: AssetImage("img/item1.jpg"),
+                                      fit: BoxFit.fill)),
+                            );
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
