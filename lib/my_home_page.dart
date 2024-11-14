@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:audiobook/my_tabs.dart';
 import 'package:flutter/material.dart';
 import 'audio/app_color.dart' as AppColors;
 
@@ -9,13 +10,19 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   // Change to List<Map<String, dynamic>>? to hold a list of maps
   List<Map<String, dynamic>>? popularbooks;
+  // controller
+  late ScrollController _scrollController;
+  late TabController _tabController;
 
   // Read data from JSON file
-  void ReadData() {
-    DefaultAssetBundle.of(context).loadString("json/popularBooks.json").then(
+  void ReadData() async {
+    await DefaultAssetBundle.of(context)
+        .loadString("json/popularBooks.json")
+        .then(
       (s) {
         setState(() {
           // Decode JSON and assign as a List<Map<String, dynamic>>
@@ -28,6 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    _scrollController = ScrollController();
     ReadData();
   }
 
@@ -40,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           body: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
+                margin: const EdgeInsets.only(left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -105,10 +114,85 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
+              //
+              Expanded(
+                child: NestedScrollView(
+                  controller: _scrollController,
+                  headerSliverBuilder: (context, isScoller) {
+                    return [
+                      SliverAppBar(
+                        backgroundColor: AppColors.silverBackground,
+                        pinned: true,
+                        bottom: PreferredSize(
+                          preferredSize: Size.fromHeight(50),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 20),
+                            child: TabBar(
+                              indicatorPadding: EdgeInsets.all(0),
+                              indicatorSize: TabBarIndicatorSize.label,
+                              labelPadding: EdgeInsets.all(0),
+                              controller: _tabController,
+                              isScrollable: false,
+                              indicator: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.green.withOpacity(0.2),
+                                        blurRadius: 7,
+                                        offset: Offset(0, 0))
+                                  ]),
+                              tabs: [
+                                AppTabs(
+                                    color: AppColors.menu1Color, text: "New"),
+                                AppTabs(
+                                    color: AppColors.menu2Color,
+                                    text: "Popular"),
+                                AppTabs(
+                                    color: AppColors.menu3Color,
+                                    text: "Trending"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ];
+                  },
+                  body: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      Material(
+                        child: const ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: Text("Context"),
+                        ),
+                      ),
+                      Material(
+                        child: const ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: Text("Context"),
+                        ),
+                      ),
+                      Material(
+                        child: const ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: Text("Context"),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
