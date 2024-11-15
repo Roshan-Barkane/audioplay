@@ -14,6 +14,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   // Change to List<Map<String, dynamic>>? to hold a list of maps
   List<Map<String, dynamic>>? popularbooks;
+  List<Map<String, dynamic>>? books;
   // controller
   late ScrollController _scrollController;
   late TabController _tabController;
@@ -27,6 +28,14 @@ class _MyHomePageState extends State<MyHomePage>
         setState(() {
           // Decode JSON and assign as a List<Map<String, dynamic>>
           popularbooks = List<Map<String, dynamic>>.from(json.decode(s));
+        });
+      },
+    );
+    await DefaultAssetBundle.of(context).loadString("json/books.json").then(
+      (s) {
+        setState(() {
+          // Decode JSON and assign as a List<Map<String, dynamic>>
+          books = List<Map<String, dynamic>>.from(json.decode(s));
         });
       },
     );
@@ -69,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage>
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Row(
@@ -83,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage>
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -128,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage>
                         backgroundColor: AppColors.silverBackground,
                         pinned: true,
                         bottom: PreferredSize(
-                          preferredSize: Size.fromHeight(50),
+                          preferredSize: Size.fromHeight(30),
                           child: Container(
                             margin: EdgeInsets.only(
                                 left: 10, right: 10, bottom: 20),
@@ -165,13 +174,44 @@ class _MyHomePageState extends State<MyHomePage>
                   body: TabBarView(
                     controller: _tabController,
                     children: [
-                      Material(
-                        child: const ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.grey,
-                          ),
-                          title: Text("Context"),
-                        ),
+                      ListView.builder(
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.only(
+                                left: 20, right: 20, top: 0, bottom: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColors.tabVarViewColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      offset: Offset(0, 0),
+                                      blurRadius: 2,
+                                    ),
+                                  ]),
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 90,
+                                      height: 120,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        image: const DecorationImage(
+                                          image: AssetImage("img/pic-1.jpg"),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       Material(
                         child: const ListTile(

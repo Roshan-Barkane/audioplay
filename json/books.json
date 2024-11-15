@@ -1,0 +1,37 @@
+[
+    {
+        "rating": "4.5",
+        "title": "THE WATER CURS",
+        "text": "Martin Hyatt",
+        "img": "img/pic-1.jpg",
+        "audio": "voice1.mp3"
+    },
+    {
+        "rating": "4.6",
+        "title": "PEACE LIFE",
+        "text": "Harzerd Bin",
+        "img": "img/pic-2.jpg",
+        "audio": "voice2.mp3"
+    },
+    {
+        "rating": "4.5",
+        "title": "DAY REMEMBLE",
+        "text": "Nichloshe",
+        "img": "img/pic-3.jpg",
+        "audio": "voice3.mp3"
+    },
+    {
+        "rating": "4.7",
+        "title": "FRANCH",
+        "text": "Paris",
+        "img": "img/pic-4.jpg",
+        "audio": "voice4.mp3"
+    },
+    {
+        "rating": "4.5",
+        "title": "THE MIND",
+        "text": "Lother Konjin",
+        "img": "img/pic-5.jpg",
+        "audio": "voice5.mp3"
+    }
+]
