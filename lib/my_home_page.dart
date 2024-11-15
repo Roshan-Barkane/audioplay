@@ -175,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage>
                     controller: _tabController,
                     children: [
                       ListView.builder(
-                        itemCount: 5,
+                        itemCount: books == null ? 0 : books?.length,
                         itemBuilder: (context, index) {
                           return Container(
                             margin: const EdgeInsets.only(
@@ -200,11 +200,68 @@ class _MyHomePageState extends State<MyHomePage>
                                       height: 120,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
-                                        image: const DecorationImage(
-                                          image: AssetImage("img/pic-1.jpg"),
+                                        image: DecorationImage(
+                                          image:
+                                              AssetImage(books?[index]["img"]),
                                           fit: BoxFit.fill,
                                         ),
                                       ),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.star,
+                                              size: 24,
+                                              color: AppColors.starColor,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "4.5",
+                                              style: TextStyle(
+                                                  color: AppColors.menu2Color),
+                                            )
+                                          ],
+                                        ),
+                                        Text(
+                                          books?[index]["title"],
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Text(
+                                          books?[index]["text"],
+                                          style: TextStyle(
+                                              color: Colors.grey.shade400,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Container(
+                                          width: 70,
+                                          height: 25,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.loveColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: const Text(
+                                            "love",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        )
+                                      ],
                                     )
                                   ],
                                 ),
