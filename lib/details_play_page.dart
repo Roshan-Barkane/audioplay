@@ -17,6 +17,7 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
       backgroundColor: AppColors.audioBluiseBackground,
       body: Stack(
         children: [
+          // top area color is blue
           Positioned(
             top: 0,
             right: 0,
@@ -26,6 +27,7 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
               color: Colors.blue.shade500,
             ),
           ),
+          // box to contain back button and search button
           Positioned(
             top: 0,
             right: 0,
@@ -51,6 +53,7 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
               elevation: 0.0,
             ),
           ),
+          // main container top show audio function
           Positioned(
             right: 0,
             left: 0,
@@ -79,6 +82,7 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
               ),
             ),
           ),
+          //audio image box
           Positioned(
             top: screenHeight * 0.12,
             left: (screenWidth - 150) / 2,
