@@ -1,3 +1,4 @@
+import 'package:audiobook/details_play_page.dart';
 import 'package:audiobook/my_home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      // home: MyHomePage(),
+      home: DetailAudioPage(),
     );
   }
 }

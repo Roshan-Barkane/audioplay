@@ -8,5 +8,6 @@ final Color menu2Color = Color(0xFFf2603d);
 final Color tabVarViewColor = Color(0xFFfdfdfd);
 final Color starColor = Color(0xFFfdc743);
 final Color loveColor = Color(0xFF00ace6);
-final Color audioBlueBackground = Color(0xFFeeeffa);
+final Color audioBluiseBackground = Color(0xFfdee7fa);
+final Color audioBlueBackground = Color.fromARGB(255, 53, 69, 255);
 final Color audioGrayBackground = Color(0xFFf2f2f2);

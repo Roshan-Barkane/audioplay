@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:audiobook/my_tabs.dart';
+import 'package:audiobook/tabBody.dart';
 import 'package:flutter/material.dart';
 import 'audio/app_color.dart' as AppColors;
 
@@ -174,118 +175,27 @@ class _MyHomePageState extends State<MyHomePage>
                   body: TabBarView(
                     controller: _tabController,
                     children: [
-                      ListView.builder(
-                        itemCount: books == null ? 0 : books?.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.only(
-                                left: 20, right: 20, top: 0, bottom: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColors.tabVarViewColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      offset: Offset(0, 0),
-                                      blurRadius: 2,
-                                    ),
-                                  ]),
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 90,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        image: DecorationImage(
-                                          image:
-                                              AssetImage(books?[index]["img"]),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.star,
-                                              size: 24,
-                                              color: AppColors.starColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              "4.5",
-                                              style: TextStyle(
-                                                  color: AppColors.menu2Color),
-                                            )
-                                          ],
-                                        ),
-                                        Text(
-                                          books?[index]["title"],
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Text(
-                                          books?[index]["text"],
-                                          style: TextStyle(
-                                              color: Colors.grey.shade400,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Container(
-                                          width: 70,
-                                          height: 25,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.loveColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: const Text(
-                                            "love",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                      TabBody(
+                        tabVarViewColor: AppColors.tabVarViewColor,
+                        menu2Color: AppColors.menu2Color,
+                        starColor: AppColors.starColor,
+                        loveColor: AppColors.loveColor,
+                        books: books,
                       ),
-                      Material(
-                        child: const ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.grey,
-                          ),
-                          title: Text("Context"),
-                        ),
+                      TabBody(
+                        tabVarViewColor: AppColors.tabVarViewColor,
+                        menu2Color: AppColors.menu2Color,
+                        starColor: AppColors.starColor,
+                        loveColor: AppColors.loveColor,
+                        books: books,
                       ),
-                      Material(
-                        child: const ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.grey,
-                          ),
-                          title: Text("Context"),
-                        ),
-                      )
+                      TabBody(
+                        tabVarViewColor: AppColors.tabVarViewColor,
+                        menu2Color: AppColors.menu2Color,
+                        starColor: AppColors.starColor,
+                        loveColor: AppColors.loveColor,
+                        books: books,
+                      ),
                     ],
                   ),
                 ),
